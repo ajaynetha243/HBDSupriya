@@ -578,11 +578,11 @@
   document.getElementById('btn-hug').addEventListener('click', function(){
     hugCount++;
     hugCounterEl.textContent = 'Hugs sent so far: ' + hugCount + ' 🤍';
-    for(var i=0;i<6;i++){
+    for(var i=0;i<10;i++){
       (function(){
         var hug = document.createElement('div');
         hug.className = 'hug-emoji';
-        hug.textContent = '🤗';
+        hug.textContent = '🫂';
         hug.style.left = (40 + Math.random()*20) + 'vw';
         hug.style.animationDelay = (Math.random()*0.3) + 's';
         document.body.appendChild(hug);
