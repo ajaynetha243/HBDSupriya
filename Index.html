@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Supriya 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rose:#c9184a;
+    --rose-deep:#7a0d2e;
+    --blush:#ffe3ec;
+    --blush-2:#ffc2d6;
+    --gold:#f4a261;
+    --plum:#3a0d24;
+    --cream:#fff7f9;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+  html,body{
+    margin:0; padding:0; height:100%;
+    background: radial-gradient(circle at 50% 0%, var(--blush-2) 0%, var(--blush) 45%, #ffb6c9 100%);
+    font-family:'Poppins', sans-serif;
+    overflow-x:hidden;
+    color:var(--plum);
+  }
+  #heart-field{
+    position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;
+  }
+  .floater{
+    position:absolute; bottom:-10%; opacity:0.85; will-change:transform;
+    animation-name: rise; animation-timing-function:linear; animation-iteration-count:infinite;
+  }
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
+    10%{ opacity:0.9;}
+    50%{ transform:translateY(-55vh) translateX(20px) rotate(15deg);}
+    90%{ opacity:0.7;}
+    100%{ transform:translateY(-115vh) translateX(-15px) rotate(-10deg); opacity:0;}
+  }
+  main{
+    position:relative; z-index:2;
+    min-height:100dvh;
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+    padding:38px 20px 60px;
+  }
+  .eyebrow{
+    letter-spacing:0.35em; text-transform:uppercase; font-size:11px;
+    color:var(--rose-deep); font-weight:600; opacity:0.75; margin-bottom:6px;
+    text-align:center;
+  }
+  .name{
+    font-family:'Dancing Script', cursive;
+    font-size:clamp(48px, 14vw, 88px);
+    color:var(--rose);
+    text-shadow: 0 2px 18px rgba(201,24,74,0.25);
+    margin:0 0 2px 0;
+    text-align:center;
+    line-height:1;
+  }
+  .tagline{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(15px, 3.6vw, 19px);
+    color:var(--plum);
+    opacity:0.85;
+    text-align:center;
+    margin:6px 0 30px 0;
+    max-width:340px;
+  }
+
+  /* Countdown card */
+  .countdown-wrap{
+    position:relative;
+    width:100%;
+    max-width:420px;
+    background: linear-gradient(160deg, #ffffffcc, #fff0f5cc);
+    border:1px solid #ffffffaa;
+    border-radius:28px;
+    padding:26px 20px 22px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 20px 45px -18px rgba(122,13,46,0.35), 0 2px 0 #ffffff inset;
+  }
+  .countdown-label{
+    text-align:center; font-size:13px; letter-spacing:0.15em; text-transform:uppercase;
+    color:var(--rose-deep); font-weight:600; margin-bottom:16px; opacity:0.8;
+  }
+  .timer-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:8px;
+  }
+  .timer-unit{
+    background: var(--rose);
+    background: linear-gradient(150deg, var(--rose) 0%, var(--rose-deep) 100%);
+    border-radius:16px;
+    padding:12px 4px 10px;
+    text-align:center;
+    color:#fff;
+    box-shadow: 0 8px 18px -8px rgba(122,13,46,0.55);
+  }
+  .timer-num{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size:clamp(22px, 6.5vw, 30px);
+    line-height:1;
+    font-variant-numeric: tabular-nums;
+  }
+  .timer-unit-label{
+    font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase;
+    opacity:0.85; margin-top:4px; font-weight:500;
+  }
+
+  .pulse-heart{
+    text-align:center; margin-top:18px; font-size:26px;
+    animation: beat 1.4s ease-in-out infinite;
+  }
+  @keyframes beat{
+    0%,100%{ transform:scale(1); }
+    15%{ transform:scale(1.18); }
+    30%{ transform:scale(0.96); }
+    45%{ transform:scale(1.1); }
+    60%{ transform:scale(1); }
+  }
+
+  /* Message carousel */
+  .message-box{
+    margin-top:34px;
+    width:100%;
+    max-width:420px;
+    min-height:92px;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    position:relative;
+  }
+  .message-text{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(17px, 4.6vw, 21px);
+    color:var(--rose-deep);
+    padding:0 10px;
+    opacity:0;
+    transform:translateY(14px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .message-text.show{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .dots{
+    display:flex; gap:6px; justify-content:center; margin-top:16px;
+  }
+  .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--blush-2);
+    transition: background 0.4s ease, transform 0.4s ease;
+  }
+  .dot.active{
+    background:var(--rose);
+    transform:scale(1.3);
+  }
+
+  /* Celebration state */
+  #celebration{
+    display:none;
+    text-align:center;
+    margin-top:20px;
+    width:100%;
+    max-width:420px;
+  }
+  #celebration .cake{ font-size:88px; line-height:1; animation: beat 1.2s ease-in-out infinite; }
+  #celebration h2{
+    font-family:'Dancing Script', cursive;
+    color:var(--rose);
+    font-size:clamp(30px,8vw,44px);
+    margin:6px 0 2px;
+  }
+  #celebration > p{
+    font-family:'Playfair Display', serif; font-style:italic;
+    color:var(--plum); opacity:0.85; max-width:340px; margin:0 auto;
+  }
+
+  /* Flower shower */
+  #flower-field{
+    position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; display:none;
+  }
+  .flower{
+    position:absolute; top:-10%; will-change:transform; opacity:0;
+    animation-name: fall; animation-timing-function:ease-in; animation-iteration-count:infinite;
+  }
+  @keyframes fall{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
+    8%{ opacity:0.95; }
+    50%{ transform:translateY(55vh) translateX(var(--drift,20px)) rotate(180deg); }
+    92%{ opacity:0.9; }
+    100%{ transform:translateY(115vh) translateX(calc(var(--drift,20px) * -1)) rotate(360deg); opacity:0; }
+  }
+
+  /* Quote carousel on celebration */
+  .quote-card{
+    margin-top:22px;
+    background: linear-gradient(160deg, #ffffffcc, #fff0f5cc);
+    border:1px solid #ffffffaa;
+    border-radius:22px;
+    padding:22px 20px;
+    min-height:100px;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 16px 34px -18px rgba(122,13,46,0.35);
+  }
+  .quote-text{
+    font-family:'Playfair Display', serif;
+    font-style:italic; font-weight:600;
+    font-size:clamp(16px,4.4vw,19px);
+    color:var(--rose-deep);
+    opacity:0; transform:translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .quote-text.show{ opacity:1; transform:translateY(0); }
+
+  /* Engagement buttons */
+  .engage-row{
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+    margin-top:22px;
+  }
+  .engage-btn{
+    border:none; cursor:pointer;
+    font-family:'Poppins', sans-serif; font-weight:500; font-size:13.5px;
+    color:#fff;
+    background: linear-gradient(150deg, var(--rose) 0%, var(--rose-deep) 100%);
+    padding:12px 16px;
+    border-radius:999px;
+    box-shadow: 0 8px 18px -8px rgba(122,13,46,0.5);
+    transition: transform 0.15s ease;
+  }
+  .engage-btn:active{ transform:scale(0.94); }
+  .engage-btn.secondary{
+    background: linear-gradient(150deg, var(--gold) 0%, #e08a3e 100%);
+  }
+  .engage-btn.tertiary{
+    background: #fff;
+    color:var(--rose-deep);
+    border:1.5px solid var(--blush-2);
+    box-shadow:none;
+  }
+
+  .reveal-card{
+    margin-top:16px;
+    background:#fff;
+    border-radius:20px;
+    padding:18px 20px;
+    box-shadow: 0 12px 26px -16px rgba(122,13,46,0.4);
+    display:none;
+  }
+  .reveal-card.show{ display:block; animation: pop-in 0.4s ease; }
+  @keyframes pop-in{
+    0%{ transform:scale(0.9); opacity:0; }
+    100%{ transform:scale(1); opacity:1; }
+  }
+  .reveal-label{
+    font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--gold); font-weight:600; margin-bottom:8px;
+  }
+  .reveal-text{
+    font-family:'Playfair Display', serif; font-style:italic; font-weight:600;
+    color:var(--plum); font-size:15.5px; line-height:1.5;
+  }
+
+  .hug-counter{
+    margin-top:14px; font-size:12.5px; color:var(--rose-deep); opacity:0.75;
+    letter-spacing:0.06em;
+  }
+  .hug-emoji{
+    position:fixed; bottom:10%; font-size:24px; z-index:6; pointer-events:none;
+    animation: hug-float 2.2s ease-out forwards;
+  }
+  @keyframes hug-float{
+    0%{ transform:translateY(0) scale(0.6); opacity:0; }
+    15%{ opacity:1; transform:translateY(-10vh) scale(1); }
+    100%{ transform:translateY(-70vh) scale(1.1); opacity:0; }
+  }
+
+  footer{
+    position:relative; z-index:2;
+    text-align:center; padding-bottom:26px;
+    font-size:11px; letter-spacing:0.1em; color:var(--rose-deep); opacity:0.55;
+    text-transform:uppercase;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .floater, .flower{ animation:none; display:none; }
+    .pulse-heart, #celebration .cake{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="heart-field"></div>
+<div id="flower-field"></div>
+
+<main>
+  <div class="eyebrow">A little something for</div>
+  <h1 class="name">Supriya</h1>
+  <p class="tagline">Every second on this clock is just me, counting down to celebrating you.</p>
+
+  <div class="countdown-wrap">
+    <div class="countdown-label">Your day arrives in</div>
+    <div class="timer-grid">
+      <div class="timer-unit">
+        <div class="timer-num" id="days">00</div>
+        <div class="timer-unit-label">Days</div>
+      </div>
+      <div class="timer-unit">
+        <div class="timer-num" id="hours">00</div>
+        <div class="timer-unit-label">Hours</div>
+      </div>
+      <div class="timer-unit">
+        <div class="timer-num" id="mins">00</div>
+        <div class="timer-unit-label">Mins</div>
+      </div>
+      <div class="timer-unit">
+        <div class="timer-num" id="secs">00</div>
+        <div class="timer-unit-label">Secs</div>
+      </div>
+    </div>
+    <div class="pulse-heart">💗</div>
+  </div>
+
+  <div class="message-box">
+    <div class="message-text" id="msg"></div>
+  </div>
+  <div class="dots" id="dots"></div>
+
+  <div id="celebration">
+    <div class="cake">🎂</div>
+    <h2>Happy Birthday, Supriya!</h2>
+    <p>Today the countdown ends and the celebration begins. I hope your day is as wonderful as you are.</p>
+
+    <div class="quote-card">
+      <div class="quote-text" id="quote"></div>
+    </div>
+
+    <div class="engage-row">
+      <button class="engage-btn" id="btn-surprise">💌 Surprise Me</button>
+      <button class="engage-btn secondary" id="btn-reasons">🌹 Why I Love You</button>
+      <button class="engage-btn tertiary" id="btn-hug">🤗 Send a Hug</button>
+    </div>
+
+    <div class="reveal-card" id="surprise-card">
+      <div class="reveal-label">A little surprise</div>
+      <div class="reveal-text" id="surprise-text"></div>
+    </div>
+
+    <div class="reveal-card" id="reasons-card">
+      <div class="reveal-label">Reason <span id="reason-count"></span></div>
+      <div class="reveal-text" id="reason-text"></div>
+    </div>
+
+    <div class="hug-counter" id="hug-counter"></div>
+  </div>
+</main>
+
+<footer>made with love, just for you</footer>
+
+<script>
+  // ---- Target date ----
+  var target = new Date("2026-08-17T04:19:00");
+
+  // Preview mode: open the page with ?preview=1 in the URL to jump straight
+  // to the celebration screen and test the buttons without waiting.
+  if(window.location.search.indexOf('preview=1') !== -1){
+    target = new Date(Date.now() + 1500);
+  }
+
+  var elDays = document.getElementById('days');
+  var elHours = document.getElementById('hours');
+  var elMins = document.getElementById('mins');
+  var elSecs = document.getElementById('secs');
+  var celebration = document.getElementById('celebration');
+  var countdownWrap = document.querySelector('.countdown-wrap');
+
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  function updateTimer(){
+    var now = new Date();
+    var diff = target - now;
+
+    if(diff <= 0){
+      elDays.textContent = '00';
+      elHours.textContent = '00';
+      elMins.textContent = '00';
+      elSecs.textContent = '00';
+      countdownWrap.style.display = 'none';
+      celebration.style.display = 'block';
+      clearInterval(timerInterval);
+      launchConfetti();
+      startFlowerShower();
+      startQuoteCarousel();
+      return;
+    }
+
+    var d = Math.floor(diff / (1000*60*60*24));
+    var h = Math.floor((diff / (1000*60*60)) % 24);
+    var m = Math.floor((diff / (1000*60)) % 60);
+    var s = Math.floor((diff / 1000) % 60);
+
+    elDays.textContent = pad(d);
+    elHours.textContent = pad(h);
+    elMins.textContent = pad(m);
+    elSecs.textContent = pad(s);
+  }
+
+  var timerInterval;
+
+  // ---- Rotating messages ----
+  var messages = [
+    "Every moment with you feels like a favorite song on repeat.",
+    "You make ordinary days feel like something worth celebrating.",
+    "Still my favorite person, every single day.",
+    "Can't wait to make your birthday as special as you make my life.",
+    "You're the best part of my everyday.",
+    "Counting seconds has never felt this exciting."
+  ];
+
+  var msgEl = document.getElementById('msg');
+  var dotsEl = document.getElementById('dots');
+  var msgIndex = 0;
+
+  messages.forEach(function(_, i){
+    var dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dotsEl.appendChild(dot);
+  });
+
+  function showMessage(i){
+    msgEl.classList.remove('show');
+    setTimeout(function(){
+      msgEl.textContent = messages[i];
+      msgEl.classList.add('show');
+      Array.prototype.forEach.call(dotsEl.children, function(d, idx){
+        d.classList.toggle('active', idx === i);
+      });
+    }, 350);
+  }
+
+  showMessage(0);
+  setInterval(function(){
+    msgIndex = (msgIndex + 1) % messages.length;
+    showMessage(msgIndex);
+  }, 3800);
+
+  // ---- Floating hearts background ----
+  var field = document.getElementById('heart-field');
+  var symbols = ['💗','💕','💖','🌸','✨'];
+
+  function spawnFloater(){
+    var el = document.createElement('div');
+    el.className = 'floater';
+    el.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+    var size = 14 + Math.random()*22;
+    el.style.fontSize = size + 'px';
+    el.style.left = Math.random()*100 + 'vw';
+    var duration = 9 + Math.random()*8;
+    el.style.animationDuration = duration + 's';
+    field.appendChild(el);
+    setTimeout(function(){ el.remove(); }, duration*1000 + 500);
+  }
+
+  for(var i=0;i<8;i++){
+    setTimeout(spawnFloater, i*400);
+  }
+  setInterval(spawnFloater, 900);
+
+  // ---- Flower shower (starts once celebration begins) ----
+  var flowerField = document.getElementById('flower-field');
+  var flowerSymbols = ['🌸','🌷','🌹','💐','🌺','🌼'];
+  var flowerShowerActive = false;
+
+  function spawnFlower(){
+    var el = document.createElement('div');
+    el.className = 'flower';
+    el.textContent = flowerSymbols[Math.floor(Math.random()*flowerSymbols.length)];
+    var size = 18 + Math.random()*20;
+    el.style.fontSize = size + 'px';
+    el.style.left = Math.random()*100 + 'vw';
+    el.style.setProperty('--drift', (Math.random()*60 - 30) + 'px');
+    var duration = 6 + Math.random()*5;
+    el.style.animationDuration = duration + 's';
+    flowerField.appendChild(el);
+    setTimeout(function(){ el.remove(); }, duration*1000 + 500);
+  }
+
+  function startFlowerShower(){
+    if(flowerShowerActive) return;
+    flowerShowerActive = true;
+    flowerField.style.display = 'block';
+    for(var i=0;i<10;i++){ setTimeout(spawnFlower, i*250); }
+    setInterval(spawnFlower, 600);
+  }
+
+  // ---- Celebration quote carousel ----
+  var quotes = [
+    "Happiness looks a lot like you, today and every day.",
+    "May this year hand you every reason to smile.",
+    "You don't just have a birthday, you make it one worth having.",
+    "Here's to another year of being effortlessly loved.",
+    "The world got so much better the day you were born.",
+    "May today be as sweet, warm and wonderful as you are."
+  ];
+  var quoteEl = document.getElementById('quote');
+  var quoteIndex = 0;
+
+  function showQuote(i){
+    quoteEl.classList.remove('show');
+    setTimeout(function(){
+      quoteEl.textContent = quotes[i];
+      quoteEl.classList.add('show');
+    }, 300);
+  }
+
+  function startQuoteCarousel(){
+    showQuote(0);
+    setInterval(function(){
+      quoteIndex = (quoteIndex + 1) % quotes.length;
+      showQuote(quoteIndex);
+    }, 4200);
+  }
+
+  // ---- Surprise Me button ----
+  var surprises = [
+    "If I could give you one gift this year, it would be the ability to see yourself the way I see you.",
+    "Somewhere out there, today is just another Tuesday. Not here. Here, it's the best day of the year.",
+    "You are, without question, my favorite reason to smile at my phone like an idiot.",
+    "I still remember exactly how it felt the first time you laughed at one of my terrible jokes.",
+    "Whatever this year brings, I just want a front row seat to it, right next to you.",
+    "You make ordinary Tuesdays feel like something worth looking forward to."
+  ];
+  var surpriseCard = document.getElementById('surprise-card');
+  var surpriseText = document.getElementById('surprise-text');
+  var lastSurprise = -1;
+
+  document.getElementById('btn-surprise').addEventListener('click', function(){
+    var idx;
+    do{ idx = Math.floor(Math.random()*surprises.length); } while(idx === lastSurprise && surprises.length > 1);
+    lastSurprise = idx;
+    surpriseText.textContent = surprises[idx];
+    surpriseCard.classList.remove('show');
+    void surpriseCard.offsetWidth;
+    surpriseCard.classList.add('show');
+  });
+
+  // ---- Why I Love You button ----
+  var reasons = [
+    "The way you get fully invested in a show, a book, or an argument on my behalf.",
+    "How you remember tiny details about people you've met once.",
+    "Your laugh, especially the version that happens when you try to hold it in.",
+    "The way you make any place feel like home within five minutes.",
+    "How fiercely you show up for the people you care about.",
+    "The fact that you're you, on your best days and your worst ones."
+  ];
+  var reasonsCard = document.getElementById('reasons-card');
+  var reasonText = document.getElementById('reason-text');
+  var reasonCount = document.getElementById('reason-count');
+  var reasonIndex = 0;
+
+  document.getElementById('btn-reasons').addEventListener('click', function(){
+    reasonText.textContent = reasons[reasonIndex];
+    reasonCount.textContent = (reasonIndex + 1) + ' / ' + reasons.length;
+    reasonsCard.classList.remove('show');
+    void reasonsCard.offsetWidth;
+    reasonsCard.classList.add('show');
+    reasonIndex = (reasonIndex + 1) % reasons.length;
+  });
+
+  // ---- Send a Hug button ----
+  var hugCount = 0;
+  var hugCounterEl = document.getElementById('hug-counter');
+
+  document.getElementById('btn-hug').addEventListener('click', function(){
+    hugCount++;
+    hugCounterEl.textContent = 'Hugs sent so far: ' + hugCount + ' 🤍';
+    for(var i=0;i<6;i++){
+      (function(){
+        var hug = document.createElement('div');
+        hug.className = 'hug-emoji';
+        hug.textContent = '🤗';
+        hug.style.left = (40 + Math.random()*20) + 'vw';
+        hug.style.animationDelay = (Math.random()*0.3) + 's';
+        document.body.appendChild(hug);
+        setTimeout(function(){ hug.remove(); }, 2500);
+      })();
+    }
+  });
+
+  // ---- Confetti burst on birthday ----
+  function launchConfetti(){
+    var colors = ['#c9184a','#f4a261','#ffc2d6','#ff8fab','#ffffff'];
+    for(var i=0;i<70;i++){
+      (function(){
+        var conf = document.createElement('div');
+        var size = 6 + Math.random()*6;
+        conf.style.position = 'fixed';
+        conf.style.top = '-10px';
+        conf.style.left = Math.random()*100 + 'vw';
+        conf.style.width = size + 'px';
+        conf.style.height = size*0.4 + 'px';
+        conf.style.background = colors[Math.floor(Math.random()*colors.length)];
+        conf.style.opacity = '0.9';
+        conf.style.zIndex = '5';
+        conf.style.borderRadius = '2px';
+        conf.style.pointerEvents = 'none';
+        conf.style.transform = 'rotate(' + (Math.random()*360) + 'deg)';
+        conf.style.transition = 'transform ' + (2.5+Math.random()*2) + 's ease-in, top ' + (2.5+Math.random()*2) + 's ease-in, opacity 0.5s ease ' + (2+Math.random()*1.5) + 's';
+        document.body.appendChild(conf);
+        requestAnimationFrame(function(){
+          conf.style.top = '100vh';
+          conf.style.transform = 'rotate(' + (Math.random()*720-360) + 'deg)';
+          conf.style.opacity = '0';
+        });
+        setTimeout(function(){ conf.remove(); }, 5000);
+      })();
+    }
+  }
+  // ---- Start the countdown ----
+  // This runs last, after every element reference, listener, and helper
+  // function above has been set up — so if the countdown is already at
+  // zero the moment the page loads, everything it needs is ready.
+  timerInterval = setInterval(updateTimer, 1000);
+  updateTimer();
+</script>
+
+</body>
+</html>
